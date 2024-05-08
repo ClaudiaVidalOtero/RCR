@@ -1,4 +1,3 @@
-
 #const n=6.
 
 black(P).
