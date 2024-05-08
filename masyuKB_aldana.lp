@@ -1,17 +1,23 @@
 
-% Define the size of the grid
-#const size = 3.
-% Define the points in the grid
-point(1..size,1..size).
-% Define the corners of the grid
-corner(1,1).
-corner(1,size).
-corner(size,1).
-corner(size,size).
+#const n = 6.
+black(0;12;26).
+white(10;13;22;23;31;34).
 
-%los puntos negro y blanco equivalen a los negro y blanco del problema original
-negro((P/n, P\n)):- black(P).
-blanco((P/n, P\n)):- white(P).
+% Define puntos individuales en el tablero
+point(P) :- P = 0..n*n-1.
+
+% Define los círculos negros en términos de puntos individuales
+black(P) :- point(P).
+black_point(X, Y) :- black(P), X = (P - 1) / (n + 1), Y = (P - 1) \ n + 1.
+
+% Define los círculos blancos en términos de puntos individuales
+white(P) :- point(P).
+white_point(X, Y) :- white(P), X = (P - 1) / (n + 1), Y = (P - 1) \ n + 1.
+
+#show white_point/2.
+
+
+
 
 %los segmentos del problema original equivalen a nuestras aristas
 seg(X*n+Y, X'*n+Y'):- arista((X,Y),(X',Y')).
