@@ -1,3 +1,26 @@
+% Definición del tamaño del grid y puntos en el grid
+% --------------------------------------------------
+
+#const size = 3.  % Define el tamaño del grid
+point(1..size,1..size).  % Define los puntos en el grid
+
+% Define los puntos en las esquinas del grid
+corner(1,1).
+corner(1,size).
+corner(size,1).
+corner(size,size).
+
+
+% Definición de los círculos blanco y negro
+% -----------------------------------------
+
+% Los puntos blanco y negro equivalen a los puntos blancos y negros del problema original
+negro((P/n, P\n)):- black(P).
+blanco((P/n, P\n)):- white(P).
+
+
+% Definición de las aristas y segmentos
+% --------------------------------------
 
 % Define the size of the grid
 #const size = 3.
