@@ -15,7 +15,7 @@ white(P).
 negro((P/n, P\n)):- black(P).
 blanco((P/n, P\n)):- white(P).
 
-%los aristamentos del problema original equivalen a nuestras aristas
+%los segmentos del problema original equivalen a nuestras aristas
 seg(X*n+Y, X'*n+Y'):- arista((X,Y),(X',Y')).
 
 
