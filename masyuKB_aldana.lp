@@ -1,7 +1,7 @@
 % Define the size of the grid
 #const size = 3.
 % Define the points in the grid
-point(X,Y) :- X=1..size, Y=1..size.
+point(1..size,1..size).
 % Define the corners of the grid
 corner(1,1).
 corner(1,size).
