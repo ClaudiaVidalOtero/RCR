@@ -2,12 +2,7 @@
 % Define the size of the grid
 #const size = 3.
 % Define the points in the grid
-point(1..size,1..size).
-% Define the corners of the grid
-corner(1,1).
-corner(1,size).
-corner(size,1).
-corner(size,size).
+point(0..size-1, 0..size-1).
 
 %los puntos negro y blanco equivalen a los negro y blanco del problema original
 negro((P/n, P\n)):- black(P).
@@ -17,7 +12,7 @@ blanco((P/n, P\n)):- white(P).
 seg(X*n+Y, X'*n+Y'):- arista((X,Y),(X',Y')).
 
 % A blanco circle can be at any empty point except the corners
-blanco(X,Y) :- point(X,Y), not corner(X,Y).
+blanco(X,Y) :- point(X,Y), not point(0,size).
 % A negro circle can be at any empty point
 negro(X,Y) :- point(X,Y).
 % A point cannot be both blanco and negro
@@ -25,8 +20,10 @@ negro(X,Y) :- point(X,Y).
 
 % Define the aristas of the path
 arista((X,Y),(X',Y')) :- point(X,Y), point(X',Y'), adjacent((X,Y),(X',Y')).
+
 %Las aristas de un nodo a otro son iguales, da igual su dirección.
 arista(X,Y) :- arista(Y,X).
+
 % Define the path based on the aristas
 path(X,Y) :- arista((X,Y),(X',Y')).
 path(X,Y) :- arista((X',Y'),(X,Y)).

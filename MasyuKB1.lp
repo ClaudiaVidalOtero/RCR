@@ -9,7 +9,7 @@ corner(1,size).
 corner(size,1).
 corner(size,size).
 
-%los puntos negro y blanco equivalen a los negro y blanco del problema original
+%los puntos negro y blanco equivalen a los black y white del problema original
 negro((P/n, P\n)):- black(P).
 blanco((P/n, P\n)):- white(P).
 
@@ -27,19 +27,18 @@ negro(X,Y) :- point(X,Y).
 arista((X,Y),(X',Y')) :- point(X,Y), point(X',Y'), adjacent((X,Y),(X',Y')).
 %Las aristas de un nodo a otro son iguales, da igual su dirección.
 arista(X,Y) :- arista(Y,X).
-% Define the path based on the aristas
-path(X,Y) :- arista((X,Y),(X',Y')).
-path(X,Y) :- arista((X',Y'),(X,Y)).
+
 
 % Each blanco circle must be passed through in a straight line
 :- blanco(X,Y), not straight(X,Y).
 % There must be a turn in the previous or next point of each blanco circle
-:- blanco(X,Y), not turn_before(X,Y), not turn_after(X,Y).
+:- blanco(X,Y), not turn_before(X,Y).
+:- blanco(X,Y), not turn_after(X,Y).!!!!!!!!!!!!!!!!!!!!!!!
 % Each negro circle must be in the corner of a turn
 :- negro(X,Y), not turn(X,Y).
 
 % Define adjacency for a grid
-adjacent((X,Y),(X+1,Y)) :- point(X,Y), point(X+1,Y), X < size.
+adjacent((X,Y),(X+1,Y)) :- point(X,Y), point(X+1,Y), X < size.    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 adjacent((X,Y),(X-1,Y)) :- point(X,Y), point(X-1,Y), X > 1.
 adjacent((X,Y),(X,Y+1)) :- point(X,Y), point(X,Y+1), Y < size.
 adjacent((X,Y),(X,Y-1)) :- point(X,Y), point(X,Y-1), Y > 1.
