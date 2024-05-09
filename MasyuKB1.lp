@@ -1,26 +1,3 @@
-% Definición del tamaño del grid y puntos en el grid
-% --------------------------------------------------
-
-#const size = 3.  % Define el tamaño del grid
-point(1..size,1..size).  % Define los puntos en el grid
-
-% Define los puntos en las esquinas del grid
-corner(1,1).
-corner(1,size).
-corner(size,1).
-corner(size,size).
-
-
-% Definición de los círculos blanco y negro
-% -----------------------------------------
-
-% Los puntos blanco y negro equivalen a los puntos blancos y negros del problema original
-negro((P/n, P\n)):- black(P).
-blanco((P/n, P\n)):- white(P).
-
-
-% Definición de las aristas y segmentos
-% --------------------------------------
 
 % Define the size of the grid
 #const size = 3.
@@ -88,3 +65,18 @@ turn_after(X,Y) :- point(X,Y), #count{ (X',Y'): arista((X,Y),(X',Y')) } = 1,
 
 % Check if the starting and ending points are connected to form a closed loop
 :- not path(1,1), not path(1,1).
+
+% Elige un conjunto de aristas
+in(X, Y) :- arista(X, Y).
+
+% No puede salir a dos nodos distintos, no puede bifurcar.
+:- in(X, Y), in(X, Z), Y != Z.
+% También no puedes entrar a dos nodos distintos.
+:- in(X, Y), in(Z, Y), X != Z.
+
+% El camino debe ser CONEXO
+% Cierre transitivo del predicado in
+reach(Y) :- in(1, Y).
+reach(Z) :- reach(Y), in(Y, Z).
+% Todos los nodos deben ser alcanzables
+:- point(Y), not reach(Y).
